@@ -35,6 +35,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    pkgs.bash
     pkgs.iterm2
     pkgs.direnv
     pkgs.awscli2
@@ -83,12 +84,21 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.hstr = {
+    enable = true;
+    enableZshIntegration = false;
+  };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = false;
     shellAliases = {
       cls = "clear";
     };
+    initExtra = ''
+      eval "$(hstr --show-zsh-configuration)"
+      bindkey -s "^R" "^[0ihstr -- ^J"
+    '';
   };
 
   programs.bash = {
