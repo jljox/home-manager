@@ -78,7 +78,7 @@
   #  /etc/profiles/per-user/jljox/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vi";
   };
 
   # Let Home Manager install and manage itself.
@@ -86,6 +86,7 @@
 
   programs.hstr = {
     enable = true;
+    enableBashIntegration = false;
     enableZshIntegration = false;
   };
 
@@ -105,7 +106,20 @@
     enable = true;
     shellAliases = {
       cls = "clear";
+      hh = "hstr";
     };     
+    initExtra = ''
+      set -o vi
+      export HSTR_CONFIG=hicolor
+      shopt -s histappend
+      export HISTCONTROL=ignorespace
+      export HISTFILESIZE=10000
+      export HISTSIZE=$\{HISTFILESIZE\}
+      export PROMPT_COMMAND="history -a; history -n;"
+      if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\e^ihstr -- \n"'; fi
+      if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\e^ihstr -k \n"'; fi
+      export HSTR_TIOCSTI=y
+    '';
   };
 
   programs.starship = {
@@ -124,7 +138,7 @@
   programs.jq.enable = true;
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
+    defaultEditor = false;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
