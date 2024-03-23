@@ -43,6 +43,12 @@
     pkgs.elmPackages.elm
     pkgs.cabal-install
     pkgs.ghc
+    pkgs.hscolour
+    pkgs.lambdabot
+    pkgs.haskellPackages.pretty-show
+    pkgs.haskellPackages.hoogle
+    pkgs.haskellPackages.hlint
+
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -60,6 +66,7 @@
     # '';
 
     # ".zshrc".source = ./dotfiles/zshrc;
+    ".ghci".source = ./dotfiles/ghci;
   };
 
   # Home Manager can also manage your environment variables through
