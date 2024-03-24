@@ -48,3 +48,8 @@ lb s1 s2 = return $ ":!lambdabot -n -e " ++ dotGHCI_escapeShellArg s1 ++ "\\ " +
 :def! instances lb "instances"   -- finds all instances of a given type class
 :def! src lb "src"               -- tries to find the source code for the given identifier
 :def! oeis lb "oeis"             -- looks up the On-Line Encyclopedia of Integer Sequences (https://oeis.org/)
+
+:def! ls \s -> return $ ":!ls " ++ s
+:def! ll \s -> return $ ":!eza -l " ++ s
+:def! lla \s -> return $ ":!eza -la " ++ s
+:def! cls const (return ":!clear")
