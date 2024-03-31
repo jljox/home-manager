@@ -91,6 +91,15 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.script-directory = {
+    enable = true;
+    settings = {
+      SD_ROOT = "${config.home.homeDirectory}/.config/home-manager/script-directory";
+      SD_EDITOR = "nvim";
+      SD_CAT = "cat";
+    };
+  };
+
   programs.hstr = {
     enable = true;
     enableBashIntegration = false;
